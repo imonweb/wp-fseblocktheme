@@ -58,11 +58,11 @@ function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => 
     $args['title'] = get_the_title();
   }
 
-  if (!$args['subtitle']) {
+  if (!isset($args['subtitle'])) {
     $args['subtitle'] = get_field('page_banner_subtitle');
   }
 
-  if (!$args['photo']) {
+  if (!isset($args['photo'])) {
     if (get_field('page_banner_background_image') AND !is_archive() AND !is_home() ) {
       $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
     } else {
@@ -108,6 +108,9 @@ function university_features() {
   add_image_size('professorLandscape', 400, 260, true);
   add_image_size('professorPortrait', 480, 650, true);
   add_image_size('pageBanner', 1500, 350, true);
+  /*  Block theme style */
+  add_theme_support('editor-styles');
+  add_editor_style(array('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i','build/style-index.css', 'build/index.css'));
 }
 
 add_action('after_setup_theme', 'university_features');
@@ -216,3 +219,59 @@ function makeNotePrivate($data, $postarr) {
   }
   return $data;
 } 
+
+/*  Banner block */
+/*
+function bannerBlock(){
+  wp_register_script('bannerBlockScript', get_stylesheet_directory_uri() . '/build/banner.js', array('wp-blocks', 'wp-editor'));
+  register_block_type("ourblocktheme/banner", array(
+    'editor_script' => 'bannerBlockScript'
+  ));
+}
+add_action('init', 'bannerBlock');
+*/
+
+/*
+function bannerBlock() {
+  $scriptHandle = "bannerBlockScript";
+  $globalJsObject = "bannerBlockThemeData";
+  wp_register_script(
+    $scriptHandle,
+    get_stylesheet_directory_uri() . "/build/banner.js",
+    ["wp-blocks", "wp-editor"]
+  );
+ 
+   // Localize the script with the theme directory URI
+   wp_localize_script(
+    $scriptHandle,
+    $globalJsObject,
+    array(
+        'themeDirectory' => get_template_directory_uri(),
+    )
+);
+ 
+  register_block_type(
+    "ourblocktheme/banner",
+    ["editor_script" => $scriptHandle]
+  );
+}
+*/
+
+/*  Generic Heading Block */
+class JSXBlock {
+  function __construct($name) {
+    $this->name = $name;
+    add_action('init', array($this, 'onInit'));
+  }
+
+  function onInit() {
+    wp_register_script($this->name, get_stylesheet_directory_uri() . "/build/{$this->name}.js", array('wp-blocks', 'wp-editor'));
+    register_block_type("ourblocktheme/{$this->name}", array(
+      'editor_script' => $this->name
+  ));
+  }
+
+} // class JSXBlock
+
+new JSXBlock('banner');
+new JSXBlock('genericheading');
