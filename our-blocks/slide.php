@@ -1,5 +1,5 @@
 <?php 
-  if(!$attributes['imgURL']) {
+  if(!isset($attributes['imgURL'])) {
     $attributes['imgURL'] = get_theme_file_uri('images/libarary-hero.jpg');
   }
 ?>
