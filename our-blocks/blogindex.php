@@ -1,9 +1,11 @@
-<?php 
+<?php
 
 pageBanner(array(
-  title => 'Welcome to our blog!',
-  subtitle => 'Keep up with the latest news.'
+  'title' => 'Welcome to our blog!',
+  'subtitle' => 'Keep up with our latest news.'
 ));
+
+
 ?>
 
 <!-- <div class="page-banner">

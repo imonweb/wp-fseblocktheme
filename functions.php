@@ -41,7 +41,9 @@ add_action('rest_api_init', 'university_custom_rest');
 
 
 // function pageBanner($args = NULL) {
-function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => NULL)) {
+
+  
+  function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => NULL)) {
 
   // if(!array_key_exists('title', $args)){
   //   $args['title'] = get_the_title();
@@ -51,12 +53,25 @@ function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => 
   //   $args['title'] = get_the_title();
   // }
  
-
+  /*  Error occurs - Warning: use of undefined constat title */
+ /*
   if(!isset($args['title'])){
     $args['title'] = get_the_title();
   } else {
     $args['title'] = get_the_title();
   }
+  */
+ 
+
+ 
+
+/*  Sol. #1 */
+// if(!array_key_exists('title', $args)){
+//   $args['title'] = get_the_title();
+//   } else {
+//     $args['title'] = get_the_title();
+// }
+ /*  Sol. #1  - end */
 
   if (!isset($args['subtitle'])) {
     $args['subtitle'] = get_field('page_banner_subtitle');
@@ -70,8 +85,10 @@ function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => 
     }
   }
 
+  
+
 ?>
-<div class="page-banner">
+ <div class="page-banner">
   <div class="page-banner__bg-image" style="background-image: url(<?php echo $args['photo']; ?>);"></div>
   <div class="page-banner__content container container--narrow">
     <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
@@ -79,9 +96,10 @@ function pageBanner($args = array('title'=>NULL, 'subtitle' => NULL, 'photo' => 
       <p><?php echo $args['subtitle']; ?></p>
     </div>
   </div>  
-</div>
-<?php }
+</div> 
+<?php  }  
 
+ 
 
 function university_files() {
   wp_enqueue_script('googleMap', '//maps.googleapis.com/maps/api/js?key=AIzaSyBLEVASMSfbDkNDnMocJjWetZnXbrSu7Z8', NULL, '1.0', true);
@@ -289,6 +307,10 @@ new PlaceholderBlock("footer");
 new PlaceholderBlock("singlepost");
 new PlaceholderBlock("page");
 new PlaceholderBlock("blogindex");
+new PlaceholderBlock("programarchive");
+new PlaceholderBlock("singleprogram");
+new PlaceholderBlock("singleprofessor");
+new PlaceholderBlock("mynotes");
 
 
 /*  Generic Heading Block */
