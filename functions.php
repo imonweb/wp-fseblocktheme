@@ -311,7 +311,14 @@ new PlaceholderBlock("programarchive");
 new PlaceholderBlock("singleprogram");
 new PlaceholderBlock("singleprofessor");
 new PlaceholderBlock("mynotes");
-
+new PlaceholderBlock("archivecampus");
+new PlaceholderBlock("archiveevent");
+new PlaceholderBlock("archive");
+new PlaceholderBlock("pastevents");
+new PlaceholderBlock("search");
+new PlaceholderBlock("searchresults");
+new PlaceholderBlock("singlecampus");
+new PlaceholderBlock("singleevent");
 
 /*  Generic Heading Block */
 class JSXBlock {
