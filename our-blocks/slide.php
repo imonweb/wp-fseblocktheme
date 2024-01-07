@@ -1,11 +1,12 @@
 <?php 
 
+  /*  Dynamic image */
   if($attributes['themeimage']){
     $attributes['imgURL'] = get_theme_file_uri('/images/' . $attributes['themeimage']);
   }
 
   if(!isset($attributes['imgURL'])) {
-    $attributes['imgURL'] = get_theme_file_uri('images/libarary-hero.jpg');
+    $attributes['imgURL'] = get_theme_file_uri('images/library-hero.jpg');
   }
 ?>
 
