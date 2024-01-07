@@ -161,6 +161,9 @@ __webpack_require__.r(__webpack_exports__);
     align: ["full"]
   },
   attributes: {
+    themeimage: {
+      type: "string"
+    },
     align: {
       type: "string",
       default: "full"
@@ -177,6 +180,16 @@ __webpack_require__.r(__webpack_exports__);
   save: SaveComponent
 });
 function EditComponent(props) {
+  // first inital page load
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    if (props.attributes.themeimage) {
+      props.setAttributes({
+        imgURL: `${slide.themeimagepath}${props.attributes.themeimage}`
+      });
+    }
+  }, []);
+
+  // ImageID
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
     if (props.attributes.imgID) {
       async function go() {
@@ -184,7 +197,9 @@ function EditComponent(props) {
           path: `/wp/v2/media/${props.attributes.imgID}`,
           method: "GET"
         });
+        // props.setAttributes({imgURL: response.media_details.sizes.pageBanner.source_url})
         props.setAttributes({
+          themeimage: "",
           imgURL: response.media_details.sizes.pageBanner.source_url
         });
       }
