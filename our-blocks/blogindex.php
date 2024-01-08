@@ -1,5 +1,5 @@
 <?php
-
+/*  index.php from traditional uni theme */
 pageBanner(array(
   'title' => 'Welcome to our blog!',
   'subtitle' => 'Keep up with our latest news.'

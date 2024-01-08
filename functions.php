@@ -320,6 +320,24 @@ new PlaceholderBlock("searchresults");
 new PlaceholderBlock("singlecampus");
 new PlaceholderBlock("singleevent");
 
+function myallowedblocks($allowed_block_types, $editor_context) {
+  // if( $editor_context->post->post_type == "professor") {
+  //   return array('core/paragraph', 'core/list');
+  // }
+
+  /*  if you are on a page/post editor screen */
+  if(!empty($editor_context->post)) {
+    return $allowed_block_types;
+  }
+  /*  if you are on the FSE screen */
+  return array('ourblocktheme/header', 'ourblocktheme/footer');
+}
+
+
+/*  Only Allow Certain Block Types in Certain Editor Environments */
+add_filter('allowed_block_types_all', 'myallowedblocks', 10, 2);
+
+
 /*  Generic Heading Block */
 class JSXBlock {
   function __construct($name, $renderCallback = null, $data = null) {
